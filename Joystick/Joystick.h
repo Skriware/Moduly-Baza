@@ -24,7 +24,6 @@ class Joystick
   public:
     Joystick(uint8_t xSignalPin, uint8_t ySignalPin);
     void begin(void);
-    void calibrate(void);
     void calibrate(float xMin, float xMax, float yMin, float yMax);
     JoystickPosition readPosition(void);
 };
