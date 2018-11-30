@@ -22,6 +22,11 @@ void BH1750::turnOff()
   this->sendCommand(BH1750::POWER_DOWN);
 }
 
+void BH1750::reset()
+{
+  this->sendCommand(BH1750::RESET);
+}
+
 void BH1750::setMode(uint8_t mode)
 {
   this->turnOn();

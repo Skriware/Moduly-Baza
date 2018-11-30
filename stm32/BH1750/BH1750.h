@@ -20,7 +20,7 @@ class BH1750
 
   public:
     static const uint8_t LOW_ADDRESS =             0b0100011;
-    static const uint8_t HIGH_ADDRESS =            0b0100011;
+    static const uint8_t HIGH_ADDRESS =            0b1011100;
 
     // Mode               Resolution  Typical measurement time
     // ------------------ ----------- ------------------------
@@ -43,6 +43,7 @@ class BH1750
            uint8_t mode=BH1750::CONTINUOUS_HI_RES_MODE2);
     void turnOn(void);
     void turnOff(void);
+    void reset(void);
     void setMode(uint8_t mode);
     float readMeasurement(void);
 };
