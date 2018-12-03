@@ -6,7 +6,7 @@ extern "C"
   #include "stm32f0xx_hal.h"
 }
 
-struct BH1750
+class BH1750
 {
   I2C_HandleTypeDef *hi2c;
   uint8_t address;
