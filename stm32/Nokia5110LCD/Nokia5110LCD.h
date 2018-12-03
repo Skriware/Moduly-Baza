@@ -8,6 +8,8 @@ extern "C"
   #include <string.h>
 }
 
+#include "Nokia5110LCDFont.h"
+
 /*
   SPI configuration:
     * Data size: 8 bytes

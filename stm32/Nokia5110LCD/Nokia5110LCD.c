@@ -132,6 +132,7 @@ void Nokia5110LCD::printf(uint8_t x, uint8_t y, const char *fmt, ...)
 
 void Nokia5110LCD::putChar(char c, uint8_t x, uint8_t y)
 {
+  this->bitmap((uint8_t *) Nokia5110LCDFont[(uint8_t) c - 32], x, y, 6, 8);
 }
 
 void Nokia5110LCD::reset()
