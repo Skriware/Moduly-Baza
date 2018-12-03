@@ -13,7 +13,7 @@ extern "C"
     * Data size: 8 bytes
     * Baud rate: 4 Mbits/s
 */
-struct Nokia5110LCD
+class Nokia5110LCD
 {
   static const uint8_t BLANK = 0b000;
   static const uint8_t NORMAL = 0b100;
