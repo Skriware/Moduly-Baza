@@ -6,21 +6,26 @@ extern "C"
   #include "stm32f0xx_hal.h"
 }
 
-class BH1750
+struct BH1750
 {
   I2C_HandleTypeDef *hi2c;
   uint8_t address;
   uint8_t mode;
+  uint8_t mtreg;
+  uint8_t buffer[2];
 
   static const uint8_t POWER_DOWN =                0b00000000;
   static const uint8_t POWER_ON =                  0b00000001;
   static const uint8_t RESET =                     0b00000111;
 
   void sendCommand(const uint8_t command);
+  float convertResult(uint16_t rawResult);
 
   public:
     static const uint8_t LOW_ADDRESS =             0b0100011;
     static const uint8_t HIGH_ADDRESS =            0b1011100;
+
+    static const uint8_t DEFAULT_MTREG =                  69;
 
     // Mode               Resolution  Typical measurement time
     // ------------------ ----------- ------------------------
@@ -40,11 +45,13 @@ class BH1750
 
     BH1750(I2C_HandleTypeDef *hi2c,
            uint8_t address,
-           uint8_t mode=BH1750::CONTINUOUS_HI_RES_MODE2);
+           uint8_t mode=BH1750::CONTINUOUS_HI_RES_MODE2,
+           uint8_t mtreg=BH1750::DEFAULT_MTREG);
     void turnOn(void);
     void turnOff(void);
     void reset(void);
     void setMode(uint8_t mode);
+    void setMeasurementTime(uint8_t mtreg);
     float readMeasurement(void);
 };
 
