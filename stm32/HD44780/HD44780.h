@@ -4,11 +4,11 @@
 extern "C"
 {
   #include "stm32f0xx.h"
+  #include <stdio.h>
+  #include <stdarg.h>
+  #include <string.h>
 }
 
-#include <stdio.h>
-#include <stdarg.h>
-#include <string.h>
 
 class HD44780
 {
@@ -31,11 +31,7 @@ class HD44780
   */
   void functionSet(uint8_t dataLength, uint8_t displayLines, uint8_t characterFont);
 
-  /*
-    A delay required for the display commands to settle.
-    It's based on SYSCLK frequency.
-  */
-  void instructionDelay(uint8_t times=1);
+  void delay_us(uint16_t ms);
 
   /*
     Send a half of a byte to the display CGRAM or DDRAM.

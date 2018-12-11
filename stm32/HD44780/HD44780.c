@@ -3,15 +3,18 @@
 HD44780::HD44780(GPIO_TypeDef* port,
                  uint16_t rsPin, uint16_t enPin,
                  uint16_t db4Pin, uint16_t db5Pin,
-                 uint16_t db6Pin, uint16_t db7Pin) : port(port),
-                                                     rsPin(rsPin), enPin(enPin),
-                                                     db4Pin(db4Pin), db5Pin(db5Pin),
-                                                     db6Pin(db6Pin), db7Pin(db7Pin) {}
-
+                 uint16_t db6Pin, uint16_t db7Pin)
+               : port(port),
+                 rsPin(rsPin), enPin(enPin),
+                 db4Pin(db4Pin), db5Pin(db5Pin),
+                 db6Pin(db6Pin), db7Pin(db7Pin)
+{
+}
 
 void HD44780::clear()
 {
   this->sendInstruction(0, 1);
+  HAL_Delay(1);
 }
 
 void HD44780::displayOnOffControl(uint8_t display, uint8_t cursor, uint8_t blinking)
@@ -64,17 +67,13 @@ void HD44780::init()
   HAL_Delay(10);
 }
 
-void HD44780::instructionDelay(uint8_t times)
+void HD44780::delay_us(uint16_t us)
 {
-  const uint8_t delay_us = 37;
-
-  uint16_t delayClockCycles = (float) delay_us * 1000000.0 / (float) HAL_RCC_GetSysClockFreq();
-
-  for (uint8_t t = 0; t < times; t++)
-  {
-    for (uint16_t i = 0; i < delayClockCycles; i++)
-      __NOP();
-  }
+  asm volatile ("MOV R0,%[loops]\n\t"
+                "1: \n\t"
+                "SUB R0, #1\n\t"
+                "CMP R0, #0\n\t"
+                "BNE 1b \n\t" : : [loops] "r" (16 * us) : "memory");
 }
 
 void HD44780::printf(const char *format, ...)
@@ -100,7 +99,7 @@ void HD44780::send4Bits(uint8_t rs, uint8_t value)
     HAL_GPIO_WritePin(this->port, this->db4Pin, (GPIO_PinState) (value & 1));
 
     HAL_GPIO_WritePin(this->port, this->enPin, GPIO_PIN_SET);
-    this->instructionDelay();
+    this->delay_us(37);
     HAL_GPIO_WritePin(this->port, this->enPin, GPIO_PIN_RESET);
 }
 
@@ -108,7 +107,7 @@ void HD44780::sendInstruction(uint8_t rs, uint8_t instruction)
 {
   this->send4Bits(rs, instruction >> 4);
   this->send4Bits(rs, instruction);
-  this->instructionDelay(100); // let the command settle
+  HAL_Delay(1); // let the command settle
 }
 
 void HD44780::setCursor(uint8_t y, uint8_t x)

@@ -6,9 +6,11 @@ DHT11::DHT11(GPIO_TypeDef *port, uint16_t pin) : port(port), pin(pin)
 
 void DHT11::delay_us(uint16_t us)
 {
-  uint16_t delayClockCycles = (float) us * 1000000.0 / (float) HAL_RCC_GetSysClockFreq();
-  for (uint16_t i = 0; i < delayClockCycles; i++)
-    __NOP();
+  asm volatile ("MOV R0, %[loops]\n\t"
+                "1: \n\t"
+                "SUB R0, #1\n\t"
+                "CMP R0, #0\n\t"
+                "BNE 1b \n\t" : : [loops] "r" (16 * us) : "memory");
 }
 
 DHT11Result DHT11::read()

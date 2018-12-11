@@ -6,6 +6,7 @@ extern "C"
   #include "stm32f0xx.h"
   #include <stdarg.h>
   #include <string.h>
+  #include <stdio.h>
 }
 
 #include "Nokia5110LCDFont.h"
