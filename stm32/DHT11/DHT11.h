@@ -18,9 +18,14 @@ class DHT11
 {
   GPIO_TypeDef *port;
   uint16_t pin;
+
+  // Data buffer.
   uint8_t data[5];
 
   void delay_us(uint16_t us);
+
+  // Counts the number of CPU cycles passed until a certain
+  // type of signal is encountered.
   uint32_t expectPulse(GPIO_PinState pinState);
 
   public:

@@ -12,6 +12,7 @@ float BH1750::readMeasurement()
                          (this->address << 1) | 1,
                          recvData, 2, 10);
 
+  // "Glue" two received bytes together into one number.
   uint16_t rawResult = recvData[1] | (recvData[0] << 8);
 
   return this->convertResult(rawResult);

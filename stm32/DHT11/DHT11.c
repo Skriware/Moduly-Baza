@@ -4,6 +4,8 @@ DHT11::DHT11(GPIO_TypeDef *port, uint16_t pin) : port(port), pin(pin)
 {
 }
 
+// Based heavily on
+// https://www.carminenoviello.com/2015/09/04/precisely-measure-microseconds-stm32/
 void DHT11::delay_us(uint16_t us)
 {
   uint8_t mhz = HAL_RCC_GetSysClockFreq() / 1000000;

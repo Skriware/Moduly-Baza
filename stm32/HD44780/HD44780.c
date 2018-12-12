@@ -67,6 +67,8 @@ void HD44780::init()
   HAL_Delay(10);
 }
 
+// Based heavily on
+// https://www.carminenoviello.com/2015/09/04/precisely-measure-microseconds-stm32/
 void HD44780::delay_us(uint16_t us)
 {
   uint8_t mhz = HAL_RCC_GetSysClockFreq() / 1000000;
