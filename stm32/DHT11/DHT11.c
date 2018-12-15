@@ -42,17 +42,17 @@ DHT11Result DHT11::read()
   // For every bit of data DHT pulls the line low for 50 us and then pulls it high
   // for some time depending on whether it sends 1 or 0.
 
-  for (uint8_t i = 0; i < 5; i++)
+  for (int i = 0; i < 5; i++)
     this->data[i] = 0;
 
   uint32_t cycles[80];
-  for (uint8_t i = 0; i < 80; i+=2)
+  for (int i = 0; i < 80; i+=2)
   {
     cycles[i] = this->expectPulse(GPIO_PIN_RESET);
     cycles[i + 1] = this->expectPulse(GPIO_PIN_SET);
   }
 
-  for (uint8_t i = 0; i < 40; i++)
+  for (int i = 0; i < 40; i++)
   {
     uint32_t lowCycles = cycles[2 * i];
     uint32_t highCycles = cycles[2 * i + 1];
@@ -63,7 +63,7 @@ DHT11Result DHT11::read()
   }
 
   uint8_t checksum = 0;
-  for (uint8_t i = 0; i < 4; i++)
+  for (int i = 0; i < 4; i++)
     checksum += this->data[i];
   
   if (checksum == this->data[4])

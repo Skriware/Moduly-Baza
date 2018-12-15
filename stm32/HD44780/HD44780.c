@@ -43,7 +43,7 @@ void HD44780::functionSet(uint8_t dataLength, uint8_t displayLines, uint8_t char
 
 void HD44780::generateCharacter(uint8_t address, uint8_t *character)
 {
-  for (uint8_t i = 0; i < 8; i++)
+  for (int i = 0; i < 8; i++)
   {
     this->setCGRAMAddress(address, i);
     this->write(character[i]);
@@ -89,7 +89,7 @@ void HD44780::printf(const char *format, ...)
   vsprintf(buffer, format, args);
   va_end(args);
 
-  for (uint8_t i = 0; i < strlen(buffer); i++)
+  for (int i = 0; i < strlen(buffer); i++)
     this->write(buffer[i]);
 }
 

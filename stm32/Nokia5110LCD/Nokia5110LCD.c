@@ -32,9 +32,9 @@ void Nokia5110LCD::bitmap(uint8_t *bitmap,
   uint8_t dx = 0;
   uint8_t dy = 0;
 
-  for (uint16_t line = 0; line < width * (height / 8); line++)
+  for (int line = 0; line < width * (height / 8); line++)
   {
-    for (uint8_t i = 0; i < 8; i++)
+    for (int i = 0; i < 8; i++)
     {
       uint8_t pixel_state = (uint8_t) !!(bitmap[line] & (1 << i));
 
@@ -60,7 +60,7 @@ uint16_t Nokia5110LCD::bufferPosition(uint8_t x, uint8_t y)
 
 void Nokia5110LCD::clear()
 {
-  for (uint16_t i = 0; i < sizeof(this->buffer); i++)
+  for (int i = 0; i < sizeof(this->buffer); i++)
     (this->buffer)[i] = 0;
 }
 
