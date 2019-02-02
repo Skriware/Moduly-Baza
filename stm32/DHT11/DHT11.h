@@ -1,5 +1,5 @@
-#ifndef __DHT11_H_
-#define __DHT11_H_
+#ifndef DHT11_H
+#define DHT11_H
 
 extern "C"
 {

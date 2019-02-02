@@ -1,3 +1,6 @@
+#ifndef SSD1306_H__
+#define SSD1306_H__
+
 #include <inttypes.h>
 #include <vector>
 #include "spi.h"
@@ -74,3 +77,5 @@ class SSD1306
     int bufferOffset(int x, int y);
     int blockOffset(int y);
 };
+
+#endif

@@ -1,5 +1,5 @@
-#ifndef __NOKIA_5110_LCD_H
-#define __NOKIA_5110_LCD_H
+#ifndef NOKIA_5110_LCD_H
+#define NOKIA_5110_LCD_H
 
 extern "C"
 {

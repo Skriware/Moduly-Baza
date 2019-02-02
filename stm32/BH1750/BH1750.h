@@ -1,5 +1,5 @@
-#ifndef __BH1750_H
-#define __BH1750_H
+#ifndef BH1750_H
+#define BH1750_H
 
 extern "C"
 {
