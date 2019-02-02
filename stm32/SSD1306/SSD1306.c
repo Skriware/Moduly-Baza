@@ -118,14 +118,13 @@ void SSD1306::bitmap(int x, int y, uint8_t *bmp, int w, int h)
   int bmpPos = 0;
   int dy = y;
 
-  while (dy < h)
+  while (dy < h + y)
   {
     int offset = this->bufferOffset(x, y+dy);
     for (int i = offset; i < offset + w; i++)
     {
       this->buffer[i] = bmp[bmpPos];
       bmpPos++;
-      this->update();
     }
 
     dy += 8;
