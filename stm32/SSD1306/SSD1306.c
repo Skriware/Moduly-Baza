@@ -130,3 +130,26 @@ void SSD1306::bitmap(int x, int y, uint8_t *bmp, int w, int h)
     dy += 8;
   }
 }
+
+// TODO: fix offsets
+void SSD1306::printf(int x, int y, const char *fmt, ...)
+{
+  int dx = 0;
+  char buf[32];
+
+  va_list args;
+  va_start(args, fmt);
+  vsprintf(buf, fmt, args);
+  va_end(args);
+
+  for (size_t i = 0; i < strlen(buf); i++)
+  {
+    this->putchar(x+dx, y, buf[i]);
+    dx += 6;
+  }
+}
+
+void SSD1306::putchar(int x, int y, char c)
+{
+  this->bitmap(x, y, (uint8_t *) SSD1306Font[(uint8_t) c - 32], 6, 8);
+}

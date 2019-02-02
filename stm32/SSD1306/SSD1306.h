@@ -1,9 +1,14 @@
-#ifndef SSD1306_H__
-#define SSD1306_H__
+#ifndef SSD1306_H
+#define SSD1306_H
 
 #include <inttypes.h>
+#include <stdarg.h>
+#include <string.h>
+#include <stdio.h>
 #include <vector>
+
 #include "spi.h"
+#include "SSD1306Font.h"
 
 class SSD1306
 {
@@ -76,6 +81,8 @@ class SSD1306
     void bitmap(int x, int y, uint8_t *bmp, int w, int h);
     int bufferOffset(int x, int y);
     int blockOffset(int y);
+    void printf(int x, int y, const char *fmt, ...);
+    void putchar(int x, int y, char c);
 };
 
 #endif

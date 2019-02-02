@@ -1,7 +1,7 @@
-#ifndef NOKIA_5110_LCD_FONT_H
-#define NOKIA_5110_LCD_FONT_H
+#ifndef SSD1306_FONT_H
+#define SSD1306_FONT_H
 
-const uint8_t Nokia5110LCDFont[][6] = {
+const uint8_t SSD1306Font[][6] = {
   { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 }, // 32: (space)
   { 0x00, 0x00, 0x5f, 0x00, 0x00, 0x00 }, // 33: !
   { 0x00, 0x07, 0x00, 0x07, 0x00, 0x00 }, // 34: "
