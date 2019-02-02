@@ -1,3 +1,6 @@
+#ifndef JOYSTICK_H
+#define JOYSTICK_H
+
 #include <Arduino.h>
 
 float floatMap(float x,
@@ -27,3 +30,5 @@ class Joystick
     void calibrate(float xMin, float xMax, float yMin, float yMax);
     JoystickPosition readPosition(void);
 };
+
+#endif

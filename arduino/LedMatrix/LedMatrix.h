@@ -1,4 +1,5 @@
-#define __LED_MATRIX_H_
+#ifndef LED_MATRIX_H
+#define LED_MATRIX_H
 
 #include <Arduino.h>
 #include <Adafruit_NeoPixel.h>
@@ -27,3 +28,5 @@ class LedMatrix
     void setPixel(uint8_t x, uint8_t y, uint32_t color);
     void show(void);
 };
+
+#endif
