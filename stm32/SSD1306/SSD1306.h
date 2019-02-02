@@ -78,7 +78,7 @@ class SSD1306
     void sendData(uint8_t *data, int dataLen);
     void update(void);
     void putPixel(int x, int y, const uint8_t state);
-    void bitmap(int x, int y, uint8_t *bmp, int w, int h);
+    void bitmap(int x, int y, uint8_t *bmp, int w, int h, bool transparent=false);
     int bufferOffset(int x, int y);
     int blockOffset(int y);
     void printf(int x, int y, const char *fmt, ...);

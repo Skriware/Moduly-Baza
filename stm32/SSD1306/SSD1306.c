@@ -112,22 +112,25 @@ void SSD1306::putPixel(int x, int y, const uint8_t state)
   }
 }
 
-// Right now only images placed at y: y % 8 == 0 are supported
-void SSD1306::bitmap(int x, int y, uint8_t *bmp, int w, int h)
+void SSD1306::bitmap(int x, int y, uint8_t *bmp, int w, int h, bool transparent)
 {
-  int bmpPos = 0;
-  int dy = y;
+  int dx = 0;
+  int dy = 0;
 
-  while (dy < h + y)
+  for (int line = 0; line < w * h/8; line++)
   {
-    int offset = this->bufferOffset(x, y+dy);
-    for (int i = offset; i < offset + w; i++)
+    for (int i = 0; i < 8; i++)
     {
-      this->buffer[i] = bmp[bmpPos];
-      bmpPos++;
+      this->putPixel(x+dx, y+dy, (uint8_t) !!(bmp[line] & (1 << i)));
+      dy++;
     }
-
-    dy += 8;
+    dy -= 8;
+    dx++;
+    if (dx > w)
+    {
+      dx = 0;
+      dy += 8;
+    }
   }
 }
 
